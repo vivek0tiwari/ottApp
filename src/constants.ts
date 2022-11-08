@@ -1,0 +1,4 @@
+export const NAVIGATION_IDENTIFIRES = {
+  HOME: 'HOME',
+  SEARCH: 'SEARCH',
+};
