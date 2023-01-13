@@ -2,9 +2,6 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import {FlatList, ListRenderItem, SafeAreaView, StyleSheet} from 'react-native';
 import {View, Text} from 'react-native';
-import {AppConfigProvider} from '../AppContext';
-import {Widget} from '../components/Carousel/types';
-import {getLayoutData} from '../repository/homePageData.API';
 import {PageProps, RequestObj} from './types';
 
 const styles = StyleSheet.create({
@@ -33,32 +30,13 @@ const styles = StyleSheet.create({
 export interface PageState {
   layoutData: any;
   data: string;
-  nextPageRequest: RequestObj;
+  nextPageRequest?: RequestObj;
 }
 
-export const Page = (props: PageProps, childern: any) => {
-  const [layoutData, setLayoutData] = React.useState({});
-  useEffect(() => {
-    async function getData() {
-      alert('hii')
-      const _layoutData = await getLayoutData();
-      setLayoutData(_layoutData);
-    }
-    getData();
-  }, [setLayoutData]);
-  const renderItem = ({item: any}) => {
-    return <Text>Hello world</Text>;
-  };
+export const Page: React.FC<PageProps> = props => {
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={layoutData}
-        renderItem={renderItem}
-        keyExtractor={(item: any) => item.hash}
-        horizontal={true}
-        ItemSeparatorComponent={({}) => <View style={[styles.separator]} />}
-      />
-      {childern}
+      <View style={props.style}>{props.children}</View>
     </SafeAreaView>
   );
 };

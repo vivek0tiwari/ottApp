@@ -27,31 +27,33 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from './src/home';
 import {SearchScreen} from './src/search';
-import AppConfigContextProvider from './src/AppContext';
+
 const Stack = createNativeStackNavigator();
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <AppConfigContextProvider>
-      <NavigationContainer theme={DarkTheme}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={({route}) => ({title: route.name + ' Header'})}
-          />
-          <Stack.Screen
-            name="Search"
-            component={SearchScreen}
-            options={({route}) => ({title: route.name + ' Header'})}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      </AppConfigContextProvider>
+    <NavigationContainer theme={DefaultTheme}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({route}) => ({title: route.name + ' Header'})}
+        />
+        <Stack.Screen
+          name="Search"
+          component={SearchScreen}
+          options={({route}) => ({title: route.name + ' Header'})}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

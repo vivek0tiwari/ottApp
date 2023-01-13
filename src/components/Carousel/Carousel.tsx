@@ -36,8 +36,8 @@ export const Carousel = (props: CarouselProps) => {
   const renderItem: ListRenderItem<CarosuelItemProps> = ({item}) => {
     return <CarosuelItem {...item} />;
   };
-  const keyExtractor = ({item}: {item: CarosuelItemProps}) => {
-    return item.id;
+  const keyExtractor = (item: CarosuelItemProps) => {
+    return item.id + '';
   };
 
   return (

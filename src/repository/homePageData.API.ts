@@ -1,6 +1,7 @@
+import {RequestObj} from './../layout-parser/types';
 import {homePageLayout} from './config.API';
 
-const BASEURL = 'http://api.themoviedb.org/3/';
+const BASEURL = 'https://api.themoviedb.org/3/';
 const API_KEY_QUERY_PARAM = 'api_key=fe34f9b5badcfdab29d710f9960fa950';
 const LANGUAGE = 'language=en-US';
 
@@ -15,13 +16,9 @@ export const generateURL = (resourceType: RESOURCE_TYPE) => {
 };
 
 export const getConfig = async () => {
-  try {
-    const resp = await fetch(generateURL(RESOURCE_TYPE.CONFIG));
-    const data = await resp.json();
-    return data;
-  } catch (e) {
-    console.error(e);
-  }
+  const resp = await fetch(generateURL(RESOURCE_TYPE.CONFIG));
+  const data = await resp.json();
+  return data;
 };
 
 export const discoverMovies = async () => {
@@ -38,7 +35,7 @@ export const discoverMovies = async () => {
   }
 };
 
-export const getLayoutData = () => {
+export const getLayoutData = (requestObj: RequestObj | undefined) => {
   return new Promise((res, rej) => {
     setTimeout(() => {
       res(homePageLayout);

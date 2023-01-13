@@ -1,15 +1,9 @@
 import * as React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Text} from 'react-native';
+import {LayoutEngine} from '../layout-parser/LayoutEngine';
 import {Page} from '../layout-parser/Page';
 import {ActionType} from '../layout-parser/types';
-
-const bannerData = {
-  backgroundImage:
-    'http://image.tmdb.org/t/p/w780/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg',
-  genres: ['Charming', 'Drama', 'Movie'],
-};
-
 
 const styles = StyleSheet.create({
   container: {
@@ -35,17 +29,11 @@ const styles = StyleSheet.create({
 });
 export const HomeScreen = ({navigation}) => {
   const [data, setData] = React.useState();
-  const layoutRequestObject = React.useRef({});
 
   const actionHandler = (type: ActionType, data: any) => {};
   return (
-    <View style={styles.container}>
-      <Page
-        pageTitle="Home Page"
-        actionHandler={actionHandler}
-        requestObject={layoutRequestObject}
-        layoutRequestObject={layoutRequestObject}
-      />
-    </View>
+    <Page style={styles.container}>
+      <LayoutEngine actionHandler={actionHandler} />
+    </Page>
   );
 };

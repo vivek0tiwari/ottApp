@@ -1,15 +1,4 @@
-import {RequestObj} from '../../layout-parser/types';
-
-export interface Widget {
-  loadType: string;
-  dataRequestObject: RequestObj;
-  type: string;
-  hash: string;
-  height: number;
-  width: number;
-  orientation: string;
-}
-
+import {Widget} from '../../layout-parser/types'
 export interface CarouselProps extends Widget {
   carouselItems: Array<CarosuelItemProps>;
   carouselTitle: string;
@@ -21,19 +10,19 @@ export interface CarouselProps extends Widget {
 }
 export interface CarosuelItemProps {
   adult: boolean;
-  backdropPath: string;
-  genreIds: Array<number>;
+  backdrop_path: string;
+  genre_ids: Array<number>;
   id: number;
-  originalLanguage: string;
-  originalTitle: string;
+  original_language: string;
+  original_title: string;
   overview: string;
   popularity: number;
-  posterPath: string;
+  poster_path: string;
   releaseDate: string;
   title: string;
   video: boolean;
-  voteAverage: number;
-  voteCount: number;
+  vote_average: number;
+  vote_count: number;
 }
 export interface ImageProps {
   imageURL: string;

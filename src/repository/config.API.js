@@ -1,3 +1,5 @@
+import {data} from './newMovies'
+
 export const configs = {
   homePageTopHeaderItems: [
     {
@@ -30,14 +32,25 @@ export const configs = {
 export const homePageLayout = {
   cards: [
     {
+      type: 'BANNER',
+      imageURL:
+        'http://image.tmdb.org/t/p/w780/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg',
+      genres:  ['Charming', 'Drama', 'Movie'],
+      backgroundImage:
+        'http://image.tmdb.org/t/p/w780/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg',
+      aspectRatio: 0.8,
+      hash: '1123222',
+    },
+    {
       orientation: 'HORIZONTAL',
       height: 10,
       width: 10,
       hash: '112323',
-      type: 'BANNER',
+      type: 'CAROUSEL',
       loadType: 'LAZY',
-      title: 'New On Nextflix',
-      dataRequestObject: {
+      carouselTitle: 'New On Nextflix',
+      carouselItems: data.results,
+      nextDataRequestObject: {
         url: 'discover/movie',
         method: 'GET',
         queryParams:
