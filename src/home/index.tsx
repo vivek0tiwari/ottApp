@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {StyleSheet} from 'react-native';
-import {View, Text} from 'react-native';
+import {View, Text, StatusBar} from 'react-native';
+import {HomePageHeader} from '../Headers/HomepageHeader';
 import {LayoutEngine} from '../layout-parser/LayoutEngine';
 import {Page} from '../layout-parser/Page';
 import {ActionType} from '../layout-parser/types';
@@ -33,7 +34,11 @@ export const HomeScreen = ({navigation}) => {
   const actionHandler = (type: ActionType, data: any) => {};
   return (
     <Page style={styles.container}>
-      <LayoutEngine actionHandler={actionHandler} />
+      <StatusBar barStyle="light-content" backgroundColor="#6a51ae" />
+      <LayoutEngine
+        actionHandler={actionHandler}
+        renderHeader={() => <HomePageHeader />}
+      />
     </Page>
   );
 };

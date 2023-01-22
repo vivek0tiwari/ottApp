@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: 12,
     fontWeight: '800',
+    flex: 1,
   },
   separator: {
     width: 8,
@@ -41,15 +42,16 @@ export const Carousel = (props: CarouselProps) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.header}>{carouselTitle}</Text>
       <FlatList
         data={carouselItems}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         ItemSeparatorComponent={({}) => <View style={[styles.separator]} />}
       />
-    </SafeAreaView>
+    </View>
   );
 };

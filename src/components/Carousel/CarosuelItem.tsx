@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
 export const CarosuelItem = (item: CarosuelItemProps) => {
   const {poster_path = ''} = item;
   const myContext = React.useContext(AppConfigProvider);
-  console.log('myContext', getImageURL(myContext.secure_base_url, poster_path));
   return (
     <View style={styles.container}>
       <FastImage

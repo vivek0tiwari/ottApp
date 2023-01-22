@@ -10,6 +10,7 @@
 
 import React, {type PropsWithChildren} from 'react';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -35,24 +36,48 @@ import {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from './src/home';
 import {SearchScreen} from './src/search';
-
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import BestGameEver from './src/games/demo1/index.ios';
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const getStackNav = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={({route}) => ({title: route.name + ' Header'})}
+      />
+    </Stack.Navigator>
+  );
+};
+const getTabNavigator = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Home"
+        options={{
+          headerShown: false,
+        }}
+        component={HomeScreen}
+      />
+      <Tab.Screen name="Search" component={SearchScreen} />
+      <Tab.Screen name="Game" component={BestGameEver} />
+    </Tab.Navigator>
+  );
+};
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <NavigationContainer theme={DefaultTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={({route}) => ({title: route.name + ' Header'})}
-        />
-        <Stack.Screen
-          name="Search"
-          component={SearchScreen}
-          options={({route}) => ({title: route.name + ' Header'})}
-        />
-      </Stack.Navigator>
+    <NavigationContainer theme={DarkTheme}>
+      {getTabNavigator()}
     </NavigationContainer>
   );
 };
@@ -73,6 +98,23 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontWeight: '700',
+  },
+  logoContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 100,
+  },
+  headerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#0008',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    position: 'absolute',
+    height: 64,
+    zIndex: 2,
+    elevation: 2,
   },
 });
 

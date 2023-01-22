@@ -33,4 +33,5 @@ export interface LayoutEngineProps {
   actionHandler: (type: ActionType, data: any) => void;
   requestObject?: RequestObj;
   layoutRequestObject?: RequestObj;
+  renderHeader?: () => React.ReactElement;
 }

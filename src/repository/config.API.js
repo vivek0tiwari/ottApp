@@ -1,4 +1,4 @@
-import {data} from './newMovies'
+import {data} from './newMovies';
 
 export const configs = {
   homePageTopHeaderItems: [
@@ -35,11 +35,13 @@ export const homePageLayout = {
       type: 'BANNER',
       imageURL:
         'http://image.tmdb.org/t/p/w780/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg',
-      genres:  ['Charming', 'Drama', 'Movie'],
+      genres: ['Charming', 'Drama', 'Movie'],
       backgroundImage:
         'http://image.tmdb.org/t/p/w780/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg',
       aspectRatio: 0.8,
       hash: '1123222',
+      bannerRankingText: '#3 in Movies',
+      currentRank: 2,
     },
     {
       orientation: 'HORIZONTAL',
@@ -49,6 +51,22 @@ export const homePageLayout = {
       type: 'CAROUSEL',
       loadType: 'LAZY',
       carouselTitle: 'New On Nextflix',
+      carouselItems: data.results,
+      nextDataRequestObject: {
+        url: 'discover/movie',
+        method: 'GET',
+        queryParams:
+          'language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate',
+      },
+    },
+    {
+      orientation: 'HORIZONTAL',
+      height: 10,
+      width: 10,
+      hash: '112324',
+      type: 'CAROUSEL',
+      loadType: 'LAZY',
+      carouselTitle: 'New Releases',
       carouselItems: data.results,
       nextDataRequestObject: {
         url: 'discover/movie',

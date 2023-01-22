@@ -64,7 +64,7 @@ export const LayoutEngine: React.FC<LayoutEngineProps> = props => {
     }
   };
 
-  const {requestObject} = props;
+  const {requestObject, renderHeader} = props;
   useEffect(() => {
     async function getData() {
       const _layoutData = await getLayoutData(requestObject);
@@ -76,7 +76,7 @@ export const LayoutEngine: React.FC<LayoutEngineProps> = props => {
   const renderItem: ListRenderItem<Widget> = ({item}) => {
     const {type, ...rest} = item;
     const Comp = getWidgetComponent(type);
-    return <Comp {...rest} />;
+    return Comp && <Comp {...rest} />;
   };
   return (
     <>
@@ -84,8 +84,11 @@ export const LayoutEngine: React.FC<LayoutEngineProps> = props => {
         <FlatList
           data={layoutData.cards}
           renderItem={renderItem}
+          ListHeaderComponent={renderHeader && renderHeader()}
           keyExtractor={(item: Widget) => item.hash}
+          stickyHeaderIndices={[0]}
           ItemSeparatorComponent={({}) => <View style={[styles.separator]} />}
+          
         />
       ) : (
         <Text>{'Loading'}</Text>
