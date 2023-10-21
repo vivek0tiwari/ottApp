@@ -1,3 +1,4 @@
+import { useTheme } from '@react-navigation/native';
 import * as React from 'react';
 import {useEffect} from 'react';
 import {
@@ -14,13 +15,11 @@ import {Widget} from '../layout-parser/types';
 import {PlayIcon} from '../Logo';
 import {TextWithIcon} from './TextWithIcon';
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   image: {
     width: windowWidth,
   },
   container: {
-    height: windowHeight / 1.5,
     marginBottom: 24,
   },
   genresContainer: {
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    flex:1,
+    flex: 1,
   },
   top10RankingIcon: {
     height: 18,
@@ -73,8 +72,18 @@ const styles = StyleSheet.create({
   bannerRankingText: {
     color: '#fff',
     fontWeight: 'bold',
-    marginLeft:8
+    marginLeft: 8,
   },
+  gradientStyle: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  iconProps: {
+    fill: '#fff',
+    width: 16,
+    height: 16,
+  },
+  iconTextProps: {color: '#fff', fontSize: 11, marginTop: 4},
 });
 export interface BannerProps extends Widget {
   imageURL: string;
@@ -86,6 +95,7 @@ export interface BannerProps extends Widget {
 }
 export const Banner = (item: BannerProps) => {
   const {backgroundImage, genres, aspectRatio = 0.8, bannerRankingText} = item;
+  const {colors} = useTheme();
   const renderGenres = () => {
     return (
       <View style={styles.genresContainer}>
@@ -121,38 +131,27 @@ export const Banner = (item: BannerProps) => {
         style={[{...styles.image, aspectRatio}]}>
         {
           <LinearGradient
-            colors={['black', 'transparent', 'black']}
+            colors={[colors.background, 'transparent', colors.background]}
             start={{x: 0, y: 1}}
             end={{x: 0, y: 0}}
-            style={{
-              flex: 1,
-              justifyContent: 'flex-end',
-            }}>
+            style={styles.gradientStyle}>
             {renderBottomStrip()}
             <View style={styles.actionContainer}>
               <TextWithIcon
                 iconName={'PlusLineIcon'}
                 text="My list"
-                iconProps={{
-                  fill: '#fff',
-                  width: 16,
-                  height: 16,
-                }}
-                textStyleProps={{color: '#fff', fontSize: 11, marginTop: 4}}
+                iconProps={styles.iconProps}
+                textStyleProps={styles.iconTextProps}
               />
               <Pressable style={styles.playButton}>
-                <PlayIcon fill={'#000'} height={12} width={12} />
+                <PlayIcon fill={colors.text} height={12} width={12} />
                 <Text style={styles.buttonText}>Play</Text>
               </Pressable>
               <TextWithIcon
                 iconName={'InformationMarkCircleOutlineIcon'}
                 text="Info"
-                iconProps={{
-                  fill: '#fff',
-                  width: 16,
-                  height: 16,
-                }}
-                textStyleProps={{color: '#fff', fontSize: 11, marginTop: 4}}
+                iconProps={styles.iconProps}
+                textStyleProps={styles.iconTextProps}
               />
             </View>
           </LinearGradient>

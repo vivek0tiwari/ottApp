@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 180,
     borderRadius: 4,
-  },
+  }
 });
 
 export const CarosuelItem = (item: CarosuelItemProps) => {

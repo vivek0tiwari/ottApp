@@ -37,7 +37,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen} from './src/home';
 import {SearchScreen} from './src/search';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import BestGameEver from './src/games/demo1/index.ios';
+import { HomeIcon, SearchIcon, VideosIcon } from './src/Logo';
+import { MyCamera } from './src/Camera';
+import { Login } from './src/Login';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const getStackNav = () => {
@@ -55,21 +57,38 @@ const getStackNav = () => {
         component={SearchScreen}
         options={({route}) => ({title: route.name + ' Header'})}
       />
+      
     </Stack.Navigator>
   );
 };
 const getTabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        if (route.name === 'Home') {
+          return <HomeIcon fill={color}/>
+        } else if (route.name === 'Search') {
+          return <SearchIcon fill={color}/>
+        } else if (route.name === 'Login') {
+          return <VideosIcon fill={color}/>
+        }
+        // You can return any component that you like here!
+      },
+      tabBarActiveTintColor: 'tomato',
+      tabBarInactiveTintColor: '#fff',
+    })}>
+      <Tab.Screen name="Login" component={Login} />
       <Tab.Screen
         name="Home"
         options={{
           headerShown: false,
         }}
+        
         component={HomeScreen}
       />
       <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Game" component={BestGameEver} />
+      {/* <Tab.Screen name="Camera" component={MyCamera} /> */}
+      
     </Tab.Navigator>
   );
 };
@@ -78,6 +97,7 @@ const App = () => {
   return (
     <NavigationContainer theme={DarkTheme}>
       {getTabNavigator()}
+      {/* {getStackNav()} */}
     </NavigationContainer>
   );
 };
